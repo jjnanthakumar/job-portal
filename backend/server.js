@@ -5,8 +5,13 @@ import passport from "./lib/passportConfig.js";
 import cors from "cors";
 import { existsSync, mkdirSync } from "fs";
 import routes from './routes/index.js'
+
+const username = "nandy"
+const password = "Temp@1234"
+const mongoDBUri = `mongodb+srv://${username}:${password}@dev-cluster.ca0cz2w.mongodb.net/?retryWrites=true&w=majority`
+
 // MongoDB
-mongoose.connect("mongodb://localhost:27017/jobPortal", {
+mongoose.connect(mongoDBUri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
@@ -35,6 +40,8 @@ app.use(bodyparser.urlencoded({ extended: true })); // support encoded bodies
 app.use(cors());
 app.use(json());
 app.use(passport.initialize());
+
+
 
 // Routing
 app.use("/auth", routes.authRoutes);
