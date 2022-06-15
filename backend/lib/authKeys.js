@@ -1,3 +1,1 @@
-module.exports = {
-  jwtSecretKey: "jwt_secret",
-};
+export const jwtSecretKey = "jwt_secret";

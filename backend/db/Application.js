@@ -1,17 +1,17 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 let schema = new mongoose.Schema(
   {
     userId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: mongoose.SchemaTypes.ObjectId,
       required: true,
     },
     recruiterId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: mongoose.SchemaTypes.ObjectId,
       required: true,
     },
     jobId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: mongoose.SchemaTypes.ObjectId,
       required: true,
     },
     status: {
@@ -77,4 +77,4 @@ let schema = new mongoose.Schema(
 //   justOne: true,
 // });
 
-module.exports = mongoose.model("applications", schema);
+export default mongoose.model("applications", schema);

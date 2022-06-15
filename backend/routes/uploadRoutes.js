@@ -1,12 +1,13 @@
-const express = require("express");
-const multer = require("multer");
-const fs = require("fs");
-const { v4: uuidv4 } = require("uuid");
-const { promisify } = require("util");
+import { Router } from "express";
+import multer from "multer";
+import { createWriteStream } from "fs";
+import { v4 as uuidv4 } from "uuid";
+import { promisify } from "util";
+import stream from 'stream'
 
-const pipeline = promisify(require("stream").pipeline);
+const pipeline = promisify(stream.pipeline);
 
-const router = express.Router();
+const router = Router();
 
 const upload = multer();
 
@@ -21,7 +22,7 @@ router.post("/resume", upload.single("file"), (req, res) => {
 
     pipeline(
       file.stream,
-      fs.createWriteStream(`${__dirname}/../public/resume/${filename}`)
+      createWriteStream(`${__dirname}/../public/resume/${filename}`)
     )
       .then(() => {
         res.send({
@@ -51,7 +52,7 @@ router.post("/profile", upload.single("file"), (req, res) => {
 
     pipeline(
       file.stream,
-      fs.createWriteStream(`${__dirname}/../public/profile/${filename}`)
+      createWriteStream(`${__dirname}/../public/profile/${filename}`)
     )
       .then(() => {
         res.send({
@@ -67,4 +68,4 @@ router.post("/profile", upload.single("file"), (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

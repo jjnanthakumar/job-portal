@@ -1,4 +1,4 @@
-const passport = require("passport");
+import passport from "passport";
 
 const jwtAuth = (req, res, next) => {
   passport.authenticate("jwt", { session: false }, function (err, user, info) {
@@ -14,4 +14,4 @@ const jwtAuth = (req, res, next) => {
   })(req, res, next);
 };
 
-module.exports = jwtAuth;
+export default jwtAuth;

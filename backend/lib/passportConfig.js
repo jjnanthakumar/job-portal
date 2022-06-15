@@ -1,12 +1,12 @@
-const passport = require("passport");
-const Strategy = require("passport-local").Strategy;
+import passport from "passport";
+import { Strategy } from "passport-local";
 
-const passportJWT = require("passport-jwt");
-const JWTStrategy = passportJWT.Strategy;
-const ExtractJWT = passportJWT.ExtractJwt;
+import { Strategy as _Strategy, ExtractJwt } from "passport-jwt";
+const JWTStrategy = _Strategy;
+const ExtractJWT = ExtractJwt;
 
-const User = require("../db/User");
-const authKeys = require("./authKeys");
+import User from "../db/User.js";
+import { jwtSecretKey } from "./authKeys.js";
 
 const filterJson = (obj, unwantedKeys) => {
   const filteredObj = {};
@@ -63,7 +63,7 @@ passport.use(
   new JWTStrategy(
     {
       jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-      secretOrKey: authKeys.jwtSecretKey,
+      secretOrKey: jwtSecretKey,
     },
     (jwt_payload, done) => {
       User.findById(jwt_payload._id)
@@ -86,4 +86,4 @@ passport.use(
   )
 );
 
-module.exports = passport;
+export default passport;

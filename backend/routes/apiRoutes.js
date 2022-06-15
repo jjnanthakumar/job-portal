@@ -1,15 +1,15 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const jwtAuth = require("../lib/jwtAuth");
+import { Router } from "express";
+import mongoose from "mongoose";
+import jwtAuth from "../lib/jwtAuth.js";
 
-const User = require("../db/User");
-const JobApplicant = require("../db/JobApplicant");
-const Recruiter = require("../db/Recruiter");
-const Job = require("../db/Job");
-const Application = require("../db/Application");
-const Rating = require("../db/Rating");
+import User from "../db/User.js";
+import JobApplicant from "../db/JobApplicant.js";
+import Recruiter from "../db/Recruiter.js";
+import Job from "../db/Job.js";
+import Application from "../db/Application.js";
+import Rating from "../db/Rating.js";
 
-const router = express.Router();
+const router = Router();
 
 // To add new job
 router.post("/jobs", jwtAuth, (req, res) => {
@@ -886,7 +886,7 @@ router.get("/applicants", jwtAuth, (req, res) => {
     if (req.query.jobId) {
       findParams = {
         ...findParams,
-        jobId: new mongoose.Types.ObjectId(req.query.jobId),
+        jobId: new mongoose.SchemaTypes.ObjectId(req.query.jobId),
       };
     }
     if (req.query.status) {
@@ -1020,7 +1020,7 @@ router.put("/rating", jwtAuth, (req, res) => {
                     Rating.aggregate([
                       {
                         $match: {
-                          receiverId: mongoose.Types.ObjectId(data.applicantId),
+                          receiverId: mongoose.SchemaTypes.ObjectId(data.applicantId),
                           category: "applicant",
                         },
                       },
@@ -1094,7 +1094,7 @@ router.put("/rating", jwtAuth, (req, res) => {
               Rating.aggregate([
                 {
                   $match: {
-                    receiverId: mongoose.Types.ObjectId(data.applicantId),
+                    receiverId: mongoose.SchemaTypes.ObjectId(data.applicantId),
                     category: "applicant",
                   },
                 },
@@ -1190,7 +1190,7 @@ router.put("/rating", jwtAuth, (req, res) => {
                     Rating.aggregate([
                       {
                         $match: {
-                          receiverId: mongoose.Types.ObjectId(data.jobId),
+                          receiverId: mongoose.SchemaTypes.ObjectId(data.jobId),
                           category: "job",
                         },
                       },
@@ -1263,7 +1263,7 @@ router.put("/rating", jwtAuth, (req, res) => {
               Rating.aggregate([
                 {
                   $match: {
-                    receiverId: mongoose.Types.ObjectId(data.jobId),
+                    receiverId: mongoose.SchemaTypes.ObjectId(data.jobId),
                     category: "job",
                   },
                 },
@@ -1377,4 +1377,4 @@ router.get("/rating", jwtAuth, (req, res) => {
 //   })(req, res, next);
 // });
 
-module.exports = router;
+export default router;

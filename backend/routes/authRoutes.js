@@ -1,13 +1,13 @@
-const express = require("express");
-const passport = require("passport");
-const jwt = require("jsonwebtoken");
-const authKeys = require("../lib/authKeys");
+import { Router } from "express";
+import passport from "passport";
+import jsonwebtoken from "jsonwebtoken";
+import { jwtSecretKey } from "../lib/authKeys.js";
 
-const User = require("../db/User");
-const JobApplicant = require("../db/JobApplicant");
-const Recruiter = require("../db/Recruiter");
+import User from "../db/User.js";
+import JobApplicant from "../db/JobApplicant.js";
+import Recruiter from "../db/Recruiter.js";
 
-const router = express.Router();
+const router = Router();
 
 router.post("/signup", (req, res) => {
   const data = req.body;
@@ -42,7 +42,7 @@ router.post("/signup", (req, res) => {
         .save()
         .then(() => {
           // Token
-          const token = jwt.sign({ _id: user._id }, authKeys.jwtSecretKey);
+          const token = jsonwebtoken.sign({ _id: user._id }, jwtSecretKey);
           res.json({
             token: token,
             type: user.type,
@@ -78,7 +78,7 @@ router.post("/login", (req, res, next) => {
         return;
       }
       // Token
-      const token = jwt.sign({ _id: user._id }, authKeys.jwtSecretKey);
+      const token = jsonwebtoken.sign({ _id: user._id }, jwtSecretKey);
       res.json({
         token: token,
         type: user.type,
@@ -87,4 +87,4 @@ router.post("/login", (req, res, next) => {
   )(req, res, next);
 });
 
-module.exports = router;
+export default router;

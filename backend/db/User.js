@@ -1,11 +1,12 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
-require("mongoose-type-email");
+import mongoose from "mongoose";
+import { hash as _hash, compare } from "bcrypt";
+import "mongoose-type-email";
+import Email from "mongoose-type-email";
 
 let schema = new mongoose.Schema(
   {
     email: {
-      type: mongoose.SchemaTypes.Email,
+      type: Email,
       unique: true,
       lowercase: true,
       required: true,
@@ -32,7 +33,7 @@ schema.pre("save", function (next) {
     return next();
   }
 
-  bcrypt.hash(user.password, 10, (err, hash) => {
+  _hash(user.password, 10, (err, hash) => {
     if (err) {
       return next(err);
     }
@@ -46,7 +47,7 @@ schema.methods.login = function (password) {
   let user = this;
 
   return new Promise((resolve, reject) => {
-    bcrypt.compare(password, user.password, (err, result) => {
+    compare(password, user.password, (err, result) => {
       if (err) {
         reject(err);
       }
@@ -59,4 +60,4 @@ schema.methods.login = function (password) {
   });
 };
 
-module.exports = mongoose.model("UserAuth", schema);
+export default mongoose.model("UserAuth", schema);
