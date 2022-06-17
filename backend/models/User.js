@@ -60,4 +60,4 @@ schema.methods.login = function (password) {
   });
 };
 
-export default mongoose.model("UserAuth", schema);
+export default mongoose.model("User", schema);

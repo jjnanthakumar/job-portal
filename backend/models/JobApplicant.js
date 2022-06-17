@@ -60,4 +60,4 @@ let schema = new mongoose.Schema(
   { collation: { locale: "en" } }
 );
 
-export default mongoose.model("JobApplicantInfo", schema);
+export default mongoose.model("JobApplicant", schema);

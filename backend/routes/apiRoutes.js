@@ -1,13 +1,13 @@
 import { Router } from "express";
 import mongoose from "mongoose";
-import jwtAuth from "../lib/jwtAuth.js";
+import jwtAuth from "../middlewares/auth.js";
 
-import User from "../db/User.js";
-import JobApplicant from "../db/JobApplicant.js";
-import Recruiter from "../db/Recruiter.js";
-import Job from "../db/Job.js";
-import Application from "../db/Application.js";
-import Rating from "../db/Rating.js";
+import User from "../models/User.js";
+import JobApplicant from "../models/JobApplicant.js";
+import Recruiter from "../models/Recruiter.js";
+import Job from "../models/Job.js";
+import Application from "../models/Application.js";
+import Rating from "../models/Rating.js";
 
 const router = Router();
 

@@ -5,7 +5,7 @@ import { Strategy as _Strategy, ExtractJwt } from "passport-jwt";
 const JWTStrategy = _Strategy;
 const ExtractJWT = ExtractJwt;
 
-import User from "../db/User.js";
+import User from "../models/User.js";
 import { jwtSecretKey } from "./authKeys.js";
 
 const filterJson = (obj, unwantedKeys) => {

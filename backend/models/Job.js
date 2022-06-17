@@ -132,4 +132,4 @@ let schema = new mongoose.Schema(
   { collation: { locale: "en" } }
 );
 
-export default mongoose.model("jobs", schema);
+export default mongoose.model("Job", schema);

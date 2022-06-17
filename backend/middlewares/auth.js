@@ -1,6 +1,6 @@
 import passport from "passport";
 
-const jwtAuth = (req, res, next) => {
+const auth = (req, res, next) => {
   passport.authenticate("jwt", { session: false }, function (err, user, info) {
     if (err) {
       return next(err);

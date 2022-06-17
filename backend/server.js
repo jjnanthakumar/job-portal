@@ -8,7 +8,7 @@ import routes from './routes/index.js'
 
 const username = "nandy"
 const password = "Temp@1234"
-const mongoDBUri = `mongodb+srv://${username}:${password}@dev-cluster.ca0cz2w.mongodb.net/?retryWrites=true&w=majority`
+const mongoDBUri = `mongodb+srv://${username}:${password}@dev-cluster.ca0cz2w.mongodb.net/job-portal?retryWrites=true&w=majority`
 
 // MongoDB
 mongoose.connect(mongoDBUri, {

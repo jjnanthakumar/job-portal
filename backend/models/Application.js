@@ -77,4 +77,4 @@ let schema = new mongoose.Schema(
 //   justOne: true,
 // });
 
-export default mongoose.model("applications", schema);
+export default mongoose.model("Application", schema);

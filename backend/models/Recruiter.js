@@ -26,4 +26,4 @@ let schema = new mongoose.Schema(
   { collation: { locale: "en" } }
 );
 
-export default mongoose.model("RecruiterInfo", schema);
+export default mongoose.model("Recruiter", schema);
